@@ -77,7 +77,7 @@ get_header();
 
 			if ( $sticky ) {
 			?>
-			<article class="media"> <!-- TODO : Make this tag appear in rendered page -->
+			<div class="media"> 
 				<h2 <?php post_class() ?>><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h2>
 				<a class="pull-left" href="<?php the_permalink(); ?>">
 				<?php
@@ -101,7 +101,7 @@ get_header();
 					</p>
 					<?php } ?>
 				</div> <!-- media-body -->
-			</article> <!-- media -->
+			</div> <!-- media -->
 			
 			<?php
 			}
