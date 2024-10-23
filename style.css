@@ -41,7 +41,7 @@ div.aligncenter {
     margin: 5px auto 5px auto;
 }
 
-.alignright {
+.alignright, article .media-content {
     float:right;
     margin: 5px 0 20px 20px;
 }
@@ -65,7 +65,7 @@ a img.alignnone {
     margin: 5px 20px 20px 0;
 }
 
-a img.alignleft {
+a img.alignleft, img.media-object {
     float: left;
     margin: 5px 20px 20px 0;
 }
@@ -216,6 +216,14 @@ li { margin-top: 5px}
      -moz-border-radius: 5px;
           border-radius: 5px;
 	text-decoration: none;
+}
+
+.media {
+	display: flex;
+}
+
+.media-left {
+	width: 400px;
 }
 
 a.btn { text-decoration:none;}
