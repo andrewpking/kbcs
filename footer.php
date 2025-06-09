@@ -1,6 +1,6 @@
-</div>
-		</div><!-- container footer-widgets -->
-</div><!-- wrapper container -->
+        </main><!-- End of main content area -->
+		</div><!-- End of Barba container -->
+		</div><!-- wrapper container -->
 
 		<footer class="container" id="foot">
 			<nav aria-label="Connect with KBCS">
@@ -79,6 +79,42 @@
 $kbcs_site_version = wp_get_theme();
 echo $kbcs_site_version->Name . " theme version " . $kbcs_site_version->Version;
 ?>  -->
+
+<script>
+// Track initialized scripts
+var initializedScripts = [];
+document.querySelectorAll('script').forEach(function(script) {
+    if (script.src) {
+        initializedScripts.push(script.src);
+    }
+});
+
+// Re-initialize scripts after Barba transitions
+barba.hooks.after((data) => {
+    // Find any new scripts in the loaded content
+    const parser = new DOMParser();
+    const newDoc = parser.parseFromString(data.next.html, 'text/html');
+    const newScripts = newDoc.querySelectorAll('script');
+    
+    newScripts.forEach(script => {
+        if (script.src && !initializedScripts.includes(script.src)) {
+            // Load new external scripts
+            const scriptEl = document.createElement('script');
+            scriptEl.src = script.src;
+            document.body.appendChild(scriptEl);
+            initializedScripts.push(script.src);
+        } else if (script.textContent) {
+            // Evaluate inline scripts
+            eval(script.textContent);
+        }
+    });
+
+    // Trigger WordPress ready event
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document).trigger('ready');
+    }
+});
+</script>
 
 </body>
 </html>

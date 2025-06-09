@@ -44,10 +44,10 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> data-barba="wrapper">
 
 <div class="container wrapper"><!-- outer container -->
-	<div class="container content"><!-- content container -->
+	<div data-barba-namespace="default"><!-- content container -->
 	<a href="#content" id="skipto-content">Skip to content</a>
 
 	<?php
@@ -167,7 +167,7 @@
      ); ?>
 				</div><!-- navbar-inner -->
 			</div><!-- navbar -->
-			<audio class="span4" id="live-stream" src="https://streamkbcs.pacificaservice.org/kbcs" controls>Audio Playback is not supported in your browser.</audio>
+			<audio class="span4" id="live-stream" src="https://streamkbcs.pacificaservice.org/kbcs" controls preload="none">Audio Playback is not supported in your browser.</audio>
 		</header><!-- row -->
 
 	<!-- Show Now Playing, Live Stream & Playlists/Audio Archives on small screens -->
@@ -176,6 +176,7 @@
 	    </div> <!--#nowplaying-->
 
 
+        <!-- Static Header - Outside Barba container -->
 		<header class="row site-header">
 			<div class="span12">
 				<div class="row logo-container">
@@ -196,9 +197,9 @@
     							</div>
 							    <div class="span4 input-append pull-right global-search hidden-phone">
 
-                               		 <form id="search" role="search" method="get" action="<?php echo esc_url(
-                                      home_url("/")
-                                  ); ?>">
+		<form id="search" role="search" method="get" action="<?php echo esc_url(
+      home_url("/")
+  ); ?>">
                                         <span aria-hidden="true" data-icon="&#xf002;"></span>
                                         <input aria-label="Search" class="span3" type="text" name="s" value="<?php echo trim(
                                             get_search_query()
@@ -206,7 +207,7 @@
 										<input hidden name='post_type' value='programs,segments,staff,events,ads' />
                                         <input id="searchsubmit" value="Search" type="submit" class="btn" />
 							    	</form>
-									<audio class="span4" id="live-stream" src="https://streamkbcs.pacificaservice.org/kbcs" controls>Audio Playback is not supported in your browser.</audio>
+									<audio class="span4" id="live-stream" src="https://streamkbcs.pacificaservice.org/kbcs" controls preload="none">Audio Playback is not supported in your browser.</audio>
 
 
 
@@ -244,13 +245,13 @@
 		</header><!-- row -->
 
 
-		<div id="enable_javascript">Please enable your javascript to have a better view of the website. Learn about <a href="http://activatejavascript.org" target="_blank">activating javascript here.</a></div>
+		<div id="enable_javascript" style="display: none">Please enable your javascript to have a better view of the website. Learn about <a href="http://activatejavascript.org" target="_blank">activating javascript here.</a></div>
 
+		<noscript>
+			<div class="alert alert-warning">
+				Please enable JavaScript to have a better view of the website. Learn about <a href="http://activatejavascript.org" target="_blank">activating javascript here.</a>
+			</div>
+		</noscript>
 
-
-		<script type="text/javascript">
-			if(document.getElementById("enable_javascript"))
-			{
-				document.getElementById("enable_javascript").style.display = "none";
-			}
-		</script>
+        <!-- Barba content area -->
+        <div data-barba="container">

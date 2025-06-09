@@ -1,0 +1,141 @@
+/**
+ * Barba.js transition styles for KBCS
+ * These styles control the appearance of page transitions
+ * and persistent audio player
+ */
+
+/* Hide elements during transitions */
+.barba-transition-in-progress {
+  overflow: hidden;
+}
+
+/* Fade transition */
+[data-barba="container"] {
+  /* Default transition duration matches the JS duration */
+  transition: opacity 0.5s ease;
+}
+
+/* Prevent interaction during transitions */
+.barba-transition-in-progress [data-barba="container"] {
+  pointer-events: none;
+}
+
+/* Prevent audio from being affected by opacity transitions */
+audio {
+  opacity: 1 !important;
+  z-index: 999 !important;
+  visibility: visible !important;
+  display: block !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
+/* Specific fix for KBCS audio player so it remains visible during transitions */
+#live-stream, #live-stream-mobile, #persistent-live-stream {
+  z-index: 999 !important;
+  position: relative !important;
+  visibility: visible !important;
+  display: block !important;
+  max-width: 100%;
+  height: auto;
+  pointer-events: auto !important;
+}
+
+/* Ensure spinitron widget doesn't disappear during transitions */
+iframe[src*="spinitron"] {
+  opacity: 1 !important;
+  z-index: 998;
+  position: relative;
+  visibility: visible !important;
+}
+
+/* Ensure navigation remains accessible during transitions */
+.top-global-nav,
+.top-mobile-nav {
+  z-index: 997;
+  position: relative;
+}
+
+/* Fix for potential flicker during transitions */
+.no-transition {
+  transition: none !important;
+}
+
+/* Additional fixes for audio player positioning */
+[data-barba-preserved="true"],
+#persistent-live-stream {
+  z-index: 1000 !important;
+  position: fixed !important;
+  bottom: 10px;
+  right: 10px;
+  width: 300px !important;
+  visibility: visible !important;
+  display: block !important;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  background-color: rgba(96, 51, 19, 0.9);
+}
+
+/* Hide duplicate audio players */
+audio:not([data-barba-preserved]):not([data-persistent="true"]):not(#persistent-live-stream) {
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
+}
+
+/* Ensure audio controls are properly sized and visible */
+audio::-webkit-media-controls-panel {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Audio player indicator */
+.audio-player-indicator {
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  background-color: rgba(96, 51, 19, 0.9);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  display: none;
+}
+
+.audio-player-indicator.is-playing {
+  display: block;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  [data-barba-preserved="true"],
+  [data-persistent="true"],
+  #persistent-live-stream {
+    width: 90% !important;
+    max-width: 300px !important;
+    bottom: 10px;
+    right: 5px;
+    z-index: 9999 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+  
+  .audio-player-indicator {
+    bottom: 60px;
+    right: 5px;
+    font-size: 11px;
+  }
+}

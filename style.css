@@ -30,6 +30,13 @@ Text Domain: kbcs-wp-theme
 .events-list ul li {
     margin-left: 0;
 }
+
+/** Barba.js **/
+.barba-container {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
 /* =WordPress Core
 -------------------------------------------------------------- */
 .alignnone {
